@@ -6,7 +6,7 @@
 /*   By: rvan-der <rvan-der@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/05 16:07:56 by rvan-der          #+#    #+#             */
-/*   Updated: 2016/03/10 00:37:25 by rvan-der         ###   ########.fr       */
+/*   Updated: 2016/04/21 18:59:35 by rvan-der         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-# define BUFF_SIZE 8
+# define BUFF_SIZE 64
 
 typedef struct				s_file
 {
