@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 #include <libft.h>
-#include <sys/syslimits.h>
+//#include <sys/syslimits.h>
 #include <stdio.h>
 
 char		*get_line(char **line)
@@ -61,14 +61,12 @@ int			parse_line(char **line, char *buff)
 	while ((*line)[++i] != '\0')
 		if ((*line)[i] == '\n' || (*line)[i] == 26)
 			return (1);
-	//if ((*line)[0] != '\0' && (*line)[i] == '\0' && buff[0] == '\0')
-	//	return (1);
 	return (0);
 }
 
 int			get_next_line(int const fd, char **line)
 {
-	static char		*saved_files[OPEN_MAX];
+	static char		*saved_files[500];
 	char			buff[BUFF_SIZE];
 	int				ret;
 
@@ -81,17 +79,17 @@ int			get_next_line(int const fd, char **line)
 			return (-1);
 		saved_files[fd][0] = '\0';
 	}
-	ret = BUFF_SIZE - 1;
 	ft_strclr((char*)buff);
 	while (!parse_line(&(saved_files[fd]), (char*)buff) &&\
 			(ret = read(fd, buff, BUFF_SIZE - 1)) != 0)
 		buff[ret] = '\0';
-	if	((*line = get_line((&saved_files[fd]))) == NULL)
+	if ((*line = get_line((&saved_files[fd]))) == NULL)
 		return (-1);
 	if (ret != BUFF_SIZE - 1 && saved_files[fd][0] == '\0')
 	{
 		free(saved_files[fd]);
 		saved_files[fd] = NULL;
+		return (0);
 	}
-	return (ret != BUFF_SIZE - 1  && saved_files[fd][0] == '\0' ? 0 : 1);
+	return (1);
 }
